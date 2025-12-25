@@ -241,6 +241,55 @@ const PH_PREFIXES = {
   sun: ['922', '923', '924', '925', '931', '932', '933', '934', '940', '941', '942', '943', '973', '974']
 };
 
+const AT_PREFIXES = {
+  a1: ['660', '661', '662', '663', '664', '665', '666', '667', '668', '669'],
+  t_mobile: ['650', '651', '652', '653', '654', '655', '656', '657', '658', '659'],
+  drei: ['670', '671', '672', '673', '674', '675', '676', '677', '678', '679']
+};
+
+const NO_PREFIXES = {
+  telenor: ['900', '901', '902', '903', '904', '905', '906', '907', '908', '909'],
+  telia: ['910', '911', '912', '913', '914', '915', '916', '917', '918', '919'],
+  netcom: ['920', '921', '922', '923', '924', '925', '926', '927', '928', '929']
+};
+
+const DK_PREFIXES = {
+  telia: ['20', '21', '22', '23', '24', '25', '26', '27', '28', '29'],
+  telenor: ['30', '31', '32', '33', '34', '35', '36', '37', '38', '39'],
+  3: ['40', '41', '42', '43', '44', '45', '46', '47', '48', '49']
+};
+
+const BE_PREFIXES = {
+  proximus: ['460', '461', '462', '463', '464', '465', '466', '467', '468', '469'],
+  vodafone: ['470', '471', '472', '473', '474', '475', '476', '477', '478', '479'],
+  base: ['480', '481', '482', '483', '484', '485', '486', '487', '488', '489']
+};
+
+const CZ_PREFIXES = {
+  t_mobile: ['601', '602', '603', '604', '605', '606', '607', '608', '609'],
+  vodafone: ['620', '621', '622', '623', '624', '625', '626', '627', '628', '629'],
+  o2: ['770', '771', '772', '773', '774', '775', '776', '777', '778', '779']
+};
+
+const GR_PREFIXES = {
+  cosmote: ['690', '691', '692', '693', '694', '695', '696', '697', '698', '699'],
+  vodafone: ['693', '694', '695'],
+  wind: ['680', '681', '682', '683', '684', '685', '686', '687', '688', '689']
+};
+
+const PT_PREFIXES = {
+  vodafone: ['910', '911', '912', '913', '914', '915', '916', '917', '918', '919'],
+  meo: ['920', '921', '922', '923', '924', '925', '926', '927', '928', '929'],
+  niu: ['930', '931', '932', '933', '934', '935', '936', '937', '938', '939']
+};
+
+const ZA_PREFIXES = {
+  vodacom: ['600', '601', '602', '603', '604', '605', '606', '607', '608', '609'],
+  mtn: ['610', '611', '612', '613', '614', '615', '616', '617', '618', '619'],
+  cell_c: ['620', '621', '622', '623', '624', '625', '626', '627', '628', '629'],
+  telkom: ['630', '631', '632', '633', '634', '635', '636', '637', '638', '639']
+};
+
 const ID_PREFIXES = {
   telkomsel: ['811', '812', '813', '821', '822', '823', '851', '852', '853'],
   indosat: ['814', '815', '816', '855', '856', '857', '858'],
@@ -428,7 +477,7 @@ export function generatePhone(country: CountryConfig) {
 
     case 'KR':
       const krPrefix = getRandomCarrierPrefix(KR_PREFIXES);
-      return `${country.phonePrefix} ${krPrefix}-${randomDigits(4)}-${randomDigits(4)}`;
+      return `${country.phonePrefix} ${krPrefix}-${randomDigits(3)}-${randomDigits(4)}`;
 
     case 'GB':
       const gbPrefix = getRandomCarrierPrefix(GB_MOBILE_PREFIXES);
@@ -455,11 +504,11 @@ export function generatePhone(country: CountryConfig) {
 
     case 'NL':
       const nlPrefix = getRandomCarrierPrefix(NL_PREFIXES);
-      return `${country.phonePrefix} 6 ${nlPrefix.slice(1)} ${randomDigits(2)} ${randomDigits(2)} ${randomDigits(2)}`;
+      return `${country.phonePrefix} ${nlPrefix} ${randomDigits(3)} ${randomDigits(2)} ${randomDigits(2)}`;
 
     case 'SE':
       const sePrefix = getRandomCarrierPrefix(SE_PREFIXES);
-      return `${country.phonePrefix} ${sePrefix.slice(0, 2)} ${sePrefix.slice(2)}${randomDigits(2)} ${randomDigits(2)} ${randomDigits(2)}`;
+      return `${country.phonePrefix} ${sePrefix} ${randomDigits(3)} ${randomDigits(2)} ${randomDigits(2)}`;
 
     case 'CH':
       const chPrefix = getRandomCarrierPrefix(CH_PREFIXES);
@@ -479,8 +528,7 @@ export function generatePhone(country: CountryConfig) {
 
     case 'IN':
       const inPrefix = getRandomCarrierPrefix(IN_PREFIXES);
-      const inRest = randomDigits(10 - inPrefix.length);
-      return `${country.phonePrefix} ${inPrefix}${inRest.slice(0, 5 - inPrefix.length + 3)} ${inRest.slice(5 - inPrefix.length + 3)}`;
+      return `${country.phonePrefix} ${inPrefix} ${randomDigits(4)} ${randomDigits(5)}`;
 
     case 'AU':
       const auPrefix = getRandomCarrierPrefix(AU_PREFIXES);
@@ -517,6 +565,38 @@ export function generatePhone(country: CountryConfig) {
       const mxRestLen = 10 - mxPrefix.length;
       const mxRest = randomDigits(mxRestLen);
       return `${country.phonePrefix} ${mxPrefix} ${mxRest.slice(0, 4)} ${mxRest.slice(4)}`;
+
+    case 'AT':
+      const atPrefix = getRandomCarrierPrefix(AT_PREFIXES);
+      return `${country.phonePrefix} ${atPrefix} ${randomDigits(3)} ${randomDigits(4)}`;
+
+    case 'NO':
+      const noPrefix = getRandomCarrierPrefix(NO_PREFIXES);
+      return `${country.phonePrefix} ${noPrefix} ${randomDigits(2)} ${randomDigits(3)}`;
+
+    case 'DK':
+      const dkPrefix = getRandomCarrierPrefix(DK_PREFIXES);
+      return `${country.phonePrefix} ${dkPrefix} ${randomDigits(2)} ${randomDigits(2)} ${randomDigits(2)}`;
+
+    case 'BE':
+      const bePrefix = getRandomCarrierPrefix(BE_PREFIXES);
+      return `${country.phonePrefix} ${bePrefix} ${randomDigits(2)} ${randomDigits(2)} ${randomDigits(2)}`;
+
+    case 'CZ':
+      const czPrefix = getRandomCarrierPrefix(CZ_PREFIXES);
+      return `${country.phonePrefix} ${czPrefix} ${randomDigits(3)} ${randomDigits(3)}`;
+
+    case 'GR':
+      const grPrefix = getRandomCarrierPrefix(GR_PREFIXES);
+      return `${country.phonePrefix} ${grPrefix} ${randomDigits(2)} ${randomDigits(4)}`;
+
+    case 'PT':
+      const ptPrefix = getRandomCarrierPrefix(PT_PREFIXES);
+      return `${country.phonePrefix} ${ptPrefix} ${randomDigits(3)} ${randomDigits(3)}`;
+
+    case 'ZA':
+      const zaPrefix = getRandomCarrierPrefix(ZA_PREFIXES);
+      return `${country.phonePrefix} ${zaPrefix} ${randomDigits(3)} ${randomDigits(3)}`;
 
     default:
       let phone = country.phoneFormat;
